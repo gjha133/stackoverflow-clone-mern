@@ -5,6 +5,7 @@ import moment from "moment";
 import copy from "copy-to-clipboard";
 import toast from 'react-hot-toast'
 import HTMLReactParser from 'html-react-parser'
+import { FallingLines } from 'react-loader-spinner'
 
 
 import upvote from "../../assets/sort-up.svg";
@@ -83,7 +84,14 @@ const QuestionsDetails = () => {
   return (
     <div className="question-details-page">
       {questionsList.data === null ? (
-        <h1>Loading...</h1>
+        <div className="loader">
+        <FallingLines
+          color="#ef8236"
+          width="100"
+          visible={true}
+          ariaLabel='falling-lines-loading'
+        />
+      </div>
       ) : (
         <>
           {questionsList.data

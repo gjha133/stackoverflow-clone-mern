@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+.loader {
+  display: grid;
+  place-content: center;
+}
+
 .main-bar-header {
   display: flex;
   justify-content: space-between;
