@@ -50,10 +50,11 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
 .review-btn:hover {
   background-color: #0086d8;
 }
 
 .ql-editor {
-  height: 150px;
-  }
+  min-height: 150px;
+}

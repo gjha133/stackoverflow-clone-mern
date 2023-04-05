@@ -2,13 +2,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { updateProfile } from "../../actions/users";
 import toast from 'react-hot-toast'
+import Editor from "../../components/Editor/Editor";
 
 const EditProfileForm = ({ currentUser, setSwitch }) => {
   const [name, setName] = useState(currentUser?.result?.name);
   const [about, setAbout] = useState(currentUser?.result?.about);
   const [tags, setTags] = useState([]);
   const dispatch = useDispatch();
-  // console.log(tags);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (tags[0] === "" || tags.length === 0) {
@@ -35,13 +36,10 @@ const EditProfileForm = ({ currentUser, setSwitch }) => {
         </label>
         <label htmlFor="about">
           <h3>About me</h3>
-          <textarea
-            id="about"
-            cols="30"
-            rows="10"
+          <Editor
             value={about}
-            onChange={(e) => setAbout(e.target.value)}
-          ></textarea>
+            onChange={setAbout}
+          />
         </label>
         <label htmlFor="tags">
           <h3>Watched tags</h3>

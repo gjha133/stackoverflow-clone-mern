@@ -79,3 +79,17 @@
   margin-left: 10px;
   cursor: pointer;
 }
+
+.user-tags-container{
+  display: flex;
+}
+
+.user-tags-link{
+  text-decoration: none;
+  padding: 0 5px;
+  margin: 5px;
+  background-color: #e1ecf4;
+  color: #39739d;
+  border-radius: 2px;
+  font-size: 13px;
+}
