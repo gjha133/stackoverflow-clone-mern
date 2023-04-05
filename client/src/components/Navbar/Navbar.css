@@ -19,7 +19,7 @@
   min-width: 85%;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 }
 
 .slide-in-icon {
@@ -36,12 +36,14 @@
   display: flex;
   align-items: center;
   flex-grow: 1;
+  width: 40%;
 }
 
 .navbar .navbar-2 {
   display: flex;
   align-items: center;
   margin: 0 15px;
+  width: 60%;
 }
 
 .nav-logo {
@@ -49,7 +51,6 @@
 }
 
 .nav-item {
-  margin: 0px 3px;
   font-size: small;
   font-weight: 500;
   text-decoration: none;
@@ -68,14 +69,14 @@
   background-color: rgb(226, 226, 226);
 }
 
-.navbar .navbar-1 form {
+.navbar .navbar-2 form {
   flex-grow: 1;
-  padding: 0px 12px;
+  padding: 0px;
   position: relative;
 }
 
-.navbar .navbar-1 form input {
-  min-width: 90%;
+.navbar .navbar-2 form input {
+  min-width: 80%;
   margin: 0;
   padding: 8px 10px 8px 32px;
   font-size: 13px;
@@ -83,10 +84,14 @@
   border-radius: 3px;
 }
 
-.navbar .navbar-1 form .search-icon {
+.navbar .navbar-2 form .search-icon {
   position: absolute;
   left: 25px;
   top: 8px;
+}
+
+.navbar .navbar-2 div {
+  margin: 0 5px 0 0;
 }
 
 .nav-links {
@@ -101,6 +106,13 @@
   background-color: #d3e4eb;
 }
 
+@media screen and (min-width: 1600px) {
+  .navbar {
+    min-width: unset;
+    width: 1440px;
+  }
+}
+
 @media screen and (max-width: 1120px) {
   .navbar .navbar-1 form {
     display: none;
@@ -113,7 +125,7 @@
   }
 }
 
-@media screen and (max-width: 620px) {
+@media screen and (max-width: 950px) {
   .navbar .navbar-1 .res-nav {
     display: none;
   }
