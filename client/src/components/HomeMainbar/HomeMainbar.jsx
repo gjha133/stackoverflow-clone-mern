@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "./HomeMainbar.css";
 import QuestionList from "./QuestionList";
 import { useSelector } from "react-redux";
-import { FallingLines } from 'react-loader-spinner'
+import Loader from "../Loader/Loader";
 
 
 const HomeMainbar = () => {
@@ -36,14 +36,7 @@ const HomeMainbar = () => {
       </div>
       <div>
         {questionsList.data === null ? (
-          <div className="loader">
-            <FallingLines
-              color="#ef8236"
-              width="100"
-              visible={true}
-              ariaLabel='falling-lines-loading'
-            />
-          </div>
+          <Loader />
         ) : (
           <>
             <p>{questionsList.data.length} questions</p>

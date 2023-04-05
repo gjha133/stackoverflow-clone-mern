@@ -22,8 +22,3 @@
 .user-profile-link h5 {
   margin: 0px 10px;
 }
-
-.loader {
-  display: grid;
-  place-content: center;
-}
