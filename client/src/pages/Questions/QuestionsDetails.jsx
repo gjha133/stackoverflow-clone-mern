@@ -4,6 +4,8 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import copy from "copy-to-clipboard";
 import toast from 'react-hot-toast'
+import HTMLReactParser from 'html-react-parser'
+
 
 import upvote from "../../assets/sort-up.svg";
 import downvote from "../../assets/sort-down.svg";
@@ -15,6 +17,8 @@ import {
   deleteQuestion,
   voteQuestion
 } from "../../actions/question";
+import Editor from "../../components/Editor/Editor";
+
 
 const QuestionsDetails = () => {
   const { id } = useParams();
@@ -107,7 +111,7 @@ const QuestionsDetails = () => {
                       />
                     </div>
                     <div style={{ width: "100%" }}>
-                      <p className="question-body">{question.questionBody}</p>
+                      <p className="question-body">{HTMLReactParser(question.questionBody)}</p>
                       <div className="question-details-tags">
                         {question.questionTags.map((tag) => (
                           <p key={tag}>{tag}</p>
@@ -163,14 +167,12 @@ const QuestionsDetails = () => {
                       handlePostAns(e, question.answer.length);
                     }}
                   >
-                    <textarea
-                      name=""
-                      id=""
-                      cols="30"
-                      rows="10"
-                      value={answer}
-                      onChange={(e) => setAnswer(e.target.value)}
-                    ></textarea>
+                    <div>
+                      <Editor
+                        value={answer}
+                        onChange={setAnswer}
+                      />
+                    </div>
                     <br />
                     <input
                       type="submit"

@@ -5,6 +5,7 @@ import { askQuestion } from "../../actions/question";
 import toast from 'react-hot-toast'
 
 import "./AskQuestion.css";
+import Editor from '../../components/Editor/Editor'
 
 const AskQuestion = () => {
   const [questionTitle, setQuestionTitle] = useState("");
@@ -17,23 +18,18 @@ const AskQuestion = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(User) {
-      if(questionTitle && questionBody && questionTags) {
-        dispatch(askQuestion({ 
-          questionTitle, 
-          questionBody, 
-          questionTags, 
+    if (User) {
+      if (questionTitle && questionBody && questionTags) {
+        dispatch(askQuestion({
+          questionTitle,
+          questionBody,
+          questionTags,
           userPosted: User.result.name,
           userId: User?.result._id,
         }, navigate))
+        toast.success('Question posted successfully')
       } else toast.error('Please enter value in all the fields')
-    } else toast.error('Login to ask question')
-  };
-
-  const handleEnter = (e) => {
-    if (e.keyCode === 13) {
-      setQuestionBody(questionBody + "\n");
-    }
+    } else toast.error('Please Login to ask question')
   };
 
   return (
@@ -63,16 +59,10 @@ const AskQuestion = () => {
                 Include all the information someone would need to answer your
                 question
               </p>
-              <textarea
-                name=""
-                id="ask-ques-body"
-                onChange={(e) => {
-                  setQuestionBody(e.target.value);
-                }}
-                cols="30"
-                rows="10"
-                onKeyPress={handleEnter}
-              ></textarea>
+              <Editor
+                value={questionBody}
+                onChange={setQuestionBody}
+              />
             </label>
             <label htmlFor="ask-ques-tags">
               <h4>Tags</h4>

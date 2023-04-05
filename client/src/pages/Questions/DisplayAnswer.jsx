@@ -5,6 +5,7 @@ import Avatar from '../../components/Avatar/Avatar'
 import moment from 'moment'
 import { deleteAnswer } from "../../actions/question";
 import toast from 'react-hot-toast'
+import HTMLReactParser from 'html-react-parser'
 
 const DisplayAnswer = ({ question, handleShare }) => {
 
@@ -20,7 +21,7 @@ const DisplayAnswer = ({ question, handleShare }) => {
     <div>
       {question.answer.map((ans) => (
         <div className="display-ans" key={ans._id}>
-          <p>{ans.answerBody}</p>
+          <p>{HTMLReactParser(ans.answerBody)}</p>
           <div className="question-actions-user">
             <div>
               <button type="button" onClick={handleShare}>

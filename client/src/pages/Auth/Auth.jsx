@@ -32,8 +32,11 @@ const Auth = () => {
         return toast.error("Please enter name")
       }
       dispatch(signup({ name, email, password }, navigate))
+      toast.success('User registered successfully')
+      toast.success('Logged in successfully')
     } else {
       dispatch(login({ email, password}, navigate))
+      toast.success('Logged in successfully')
     }
     
   }
