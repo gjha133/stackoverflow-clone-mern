@@ -16,29 +16,31 @@ const Auth = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const handleSwitch = () => { 
+  const handleSwitch = () => {
     setIsSignup(!isSignup);
     setName("");
     setEmail("");
     setPassword("");
   }
-  const handleSubmit = (e) => { 
+  const handleSubmit = (e) => {
     e.preventDefault()
     if (!email && !password) {
       return toast.error("Please enter email and password");
     }
-    if(isSignup) {
-      if(!name) {
+    if (isSignup) {
+      if (!name) {
         return toast.error("Please enter name")
       }
       dispatch(signup({ name, email, password }, navigate))
+      toast.success('Redirecting...')
       toast.success('User registered successfully')
       toast.success('Logged in successfully')
     } else {
-      dispatch(login({ email, password}, navigate))
+      dispatch(login({ email, password }, navigate))
+      toast.success('Redirecting...')
       toast.success('Logged in successfully')
     }
-    
+
   }
 
   return (
