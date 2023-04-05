@@ -1,89 +1,88 @@
 import React, { useState } from "react";
 import { useParams, Link, useNavigate, useLocation } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import copy from "copy-to-clipboard";
+import toast from 'react-hot-toast'
 
 import upvote from "../../assets/sort-up.svg";
 import downvote from "../../assets/sort-down.svg";
 import "./Questions.css";
 import Avatar from "../../components/Avatar/Avatar";
 import DisplayAnswer from "./DisplayAnswer";
-
-let questionsList = [{
-  _id: '1',
-  upVotes: 3,
-  downVotes: 2,
-  noOfAnswers: 2,
-  questionTitle: "What is a function",
-  questionBody: "It meant to be",
-  questionTags: ["java", "node js", "react js"],
-  userPosted: "gautam",
-  userId: 1,
-  askedOn: "jan 1",
-  answer: [{
-    answerBody: "Answer",
-    userAnswered: 'kumar',
-    answeredOn: 'jan 2',
-    userId: 2,
-  }]
-}, {
-  _id: '2',
-  upVotes: 3,
-  downVotes: 1,
-  noOfAnswers: 2,
-  questionTitle: "What is a function",
-  questionBody: "It meant to be",
-  questionTags: ["java", "node js", "react js"],
-  userPosted: "gautam",
-  userId: 1,
-  askedOn: "jan 1",
-  answer: [{
-    answerBody: "Answer",
-    userAnswered: 'kumar',
-    answeredOn: 'jan 2',
-    userId: 2,
-  }]
-}, {
-  _id: '3',
-  upVotes: 3,
-  downVotes: 0,
-  noOfAnswers: 2,
-  questionTitle: "What is a function",
-  questionBody: "It meant to be",
-  questionTags: ["java", "node js", "react js"],
-  userPosted: "gautam",
-  userId: 1,
-  askedOn: "jan 1",
-  answer: [{
-    answerBody: "Answer",
-    userAnswered: 'kumar',
-    answeredOn: 'jan 2',
-    userId: 2,
-  }]
-}]
+import {
+  postAnswer,
+  deleteQuestion,
+  voteQuestion
+} from "../../actions/question";
 
 const QuestionsDetails = () => {
   const { id } = useParams();
+  const questionsList = useSelector((state) => state.questionsReducer);
+  const User = useSelector((state) => state.currentUserReducer);
 
-  let User = 1
+  const [answer, setAnswer] = useState("");
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  const url = "http://localhost:3000";
 
-  const handlePostAns = (e, answerLength) => { };
+  const handlePostAns = (e, answerLength) => {
+    e.preventDefault();
+    if (!User) {
+      toast.error("Please Login or Signup to answer a question");
+      navigate("/Auth");
+    } else {
+      if (answer === "") {
+        toast.error("Enter an answer before submitting");
+      } else {
+        dispatch(
+          postAnswer({
+            id,
+            noOfAnswers: answerLength + 1,
+            answerBody: answer,
+            userAnswered: User.result.name,
+            userId: User.result._id
+          })
+        );
+        setAnswer("");
+      }
+    }
+  };
 
-  const handleDelete = () => { };
+  const handleShare = () => {
+    copy(url + location.pathname);
+    toast.success('URL copied to clipboard');
+  };
 
-  const handleShare = () => { };
+  const handleDelete = () => {
+    dispatch(deleteQuestion(id, navigate));
+    toast.success('Question deleted')
+  };
 
-  const handleUpVote = () => { };
+  const handleUpVote = () => {
+    if (!User) {
+      return toast.error("Please Login or Signup to upvote");
+    }
+    dispatch(voteQuestion(id, 'upVote', User.result._id))
+    toast.success('Upvoted')
+  };
 
-  const handleDownVote = () => { };
+  const handleDownVote = () => {
+    if (!User) {
+      return toast.error("Please Login or Signup to downvote");
+    }
+    dispatch(voteQuestion(id, 'downVote', User.result._id))
+    toast.success('Downvoted')
+  };
 
   return (
     <div className="question-details-page">
-      {questionsList === null ? (
+      {questionsList.data === null ? (
         <h1>Loading...</h1>
       ) : (
         <>
-          {questionsList
+          {questionsList.data
             .filter((question) => question._id === id)
             .map((question) => (
               <div key={question._id}>
@@ -96,13 +95,15 @@ const QuestionsDetails = () => {
                         alt=""
                         width="18"
                         className="votes-icon"
+                        onClick={handleUpVote}
                       />
-                      <p>{question.upVotes - question.downVotes}</p>
+                      <p>{question.upVote.length - question.downVote.length}</p>
                       <img
                         src={downvote}
                         alt=""
                         width="18"
                         className="votes-icon"
+                        onClick={handleDownVote}
                       />
                     </div>
                     <div style={{ width: "100%" }}>
@@ -114,12 +115,17 @@ const QuestionsDetails = () => {
                       </div>
                       <div className="question-actions-user">
                         <div>
-                          <button type="button">
+                          <button type="button" onClick={handleShare}>
                             Share
                           </button>
+                          {User?.result._id === question.userId && (
+                            <button type="button" onClick={handleDelete}>
+                              Delete
+                            </button>
+                          )}
                         </div>
                         <div>
-                          <p>asked {question.askedOn}</p>
+                          <p>asked {moment(question.askedOn).fromNow()}</p>
                           <Link
                             to={`/Users/${question.userId}`}
                             className="user-link"
@@ -162,7 +168,8 @@ const QuestionsDetails = () => {
                       id=""
                       cols="30"
                       rows="10"
-                      onChange={() => {}}
+                      value={answer}
+                      onChange={(e) => setAnswer(e.target.value)}
                     ></textarea>
                     <br />
                     <input

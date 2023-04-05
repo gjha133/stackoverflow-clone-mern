@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { askQuestion } from "../../actions/question";
+import toast from 'react-hot-toast'
 
 import "./AskQuestion.css";
 
@@ -9,11 +12,26 @@ const AskQuestion = () => {
   const [questionTags, setQuestionTags] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const User = useSelector(state => state.currentUserReducer)
 
-  const handleSubmit = (e) => {};
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if(User) {
+      if(questionTitle && questionBody && questionTags) {
+        dispatch(askQuestion({ 
+          questionTitle, 
+          questionBody, 
+          questionTags, 
+          userPosted: User.result.name,
+          userId: User?.result._id,
+        }, navigate))
+      } else toast.error('Please enter value in all the fields')
+    } else toast.error('Login to ask question')
+  };
 
   const handleEnter = (e) => {
-    if (e.key === "Enter") {
+    if (e.keyCode === 13) {
       setQuestionBody(questionBody + "\n");
     }
   };
@@ -71,7 +89,7 @@ const AskQuestion = () => {
           </div>
           <input
             type="submit"
-            value="Reivew your question"
+            value="Post Question"
             className="review-btn"
           />
         </form>

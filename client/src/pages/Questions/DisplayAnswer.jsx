@@ -1,12 +1,21 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
 import Avatar from '../../components/Avatar/Avatar'
 import moment from 'moment'
+import { deleteAnswer } from "../../actions/question";
+import toast from 'react-hot-toast'
 
 const DisplayAnswer = ({ question, handleShare }) => {
 
-  const User = 1
-  const handleDelete = () => {}
+  const dispatch = useDispatch()
+  const User = useSelector((state) => state.currentUserReducer);
+  const { id } = useParams()
+
+  const handleDelete = (answerId, noOfAnswers) => {
+    dispatch(deleteAnswer(id, answerId, noOfAnswers - 1));
+    toast.success('Answer deleted')
+  }
   return (
     <div>
       {question.answer.map((ans) => (

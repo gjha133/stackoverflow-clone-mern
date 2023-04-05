@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const WidgetTags = () => {
   const tags = [
@@ -24,7 +25,9 @@ const WidgetTags = () => {
       <h4>Watched tags</h4>
       <div className="widget-tags-div">
         {tags.map((tag) => (
-          <p key={tag}>{tag}</p>
+          <Link key = {tag} style={{ textDecoration: 'none'}} to={'/Tags'}>
+            <p>{tag}</p>
+          </Link>
         ))}
       </div>
     </div>

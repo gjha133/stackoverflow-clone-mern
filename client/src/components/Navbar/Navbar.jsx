@@ -1,15 +1,43 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect} from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import toast from 'react-hot-toast'
+import decode from "jwt-decode";
+
 import Avatar from '../Avatar/Avatar'
+import { setCurrentUser } from '../../actions/currentUser'
+
 import logo from '../../assets/logo.png'
 import search from '../../assets/search-solid.svg'
-import './Navbar.css'
 import bars from "../../assets/bars-solid.svg";
+import './Navbar.css'
 
 
 const Navbar = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const User = useSelector((state) => (state.currentUserReducer))
 
-  const User = null
+  const handleLogout = () => {
+    dispatch({type: 'LOGOUT'})
+    toast.success('Logged out successfully')
+    navigate('/')
+    dispatch(setCurrentUser(null))
+  }
+
+  useEffect(() => {
+    const token = User?.token;
+    if (token) {
+      const decodedToken = decode(token);
+      console.log(decodedToken)
+      if (decodedToken.exp * 1000 < new Date().getTime()) {
+        handleLogout();
+      }
+    }
+    dispatch(setCurrentUser(JSON.parse(localStorage.getItem('Profile'))))
+  
+  }, [User?.token, dispatch])
+  
 
   return (
     <nav className="main-nav">
@@ -51,15 +79,15 @@ const Navbar = () => {
                   color="white"
                 >
                   <Link
-                    to={'/User'}
+                    to={`/Users/${User?.result?._id}`}
                     style={{
                       color: "white", textDecoration: "none"
                     }}
                   >
-                    G
+                    {User.result.name.charAt(0).toUpperCase()}
                   </Link>
                 </Avatar>
-                <button className='nav-item nav-links'>Log Out</button>
+                <button className='nav-item nav-links' onClick={handleLogout}>Log Out</button>
               </>
             )
           }

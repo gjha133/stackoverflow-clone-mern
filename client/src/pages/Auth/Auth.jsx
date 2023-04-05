@@ -1,14 +1,20 @@
 import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import icon from "../../assets/icon.png";
 import AboutAuth from "./AboutAuth";
+import toast from "react-hot-toast";
+import { signup, login } from '../../actions/auth';
 import './Auth.css'
 
 const Auth = () => {
-
   const [isSignup, setIsSignup] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSwitch = () => { 
     setIsSignup(!isSignup);
@@ -16,7 +22,21 @@ const Auth = () => {
     setEmail("");
     setPassword("");
   }
-  const handleSubmit = () => { }
+  const handleSubmit = (e) => { 
+    e.preventDefault()
+    if (!email && !password) {
+      return toast.error("Please enter email and password");
+    }
+    if(isSignup) {
+      if(!name) {
+        return toast.error("Please enter name")
+      }
+      dispatch(signup({ name, email, password }, navigate))
+    } else {
+      dispatch(login({ email, password}, navigate))
+    }
+    
+  }
 
   return (
     <section className="auth-section">
