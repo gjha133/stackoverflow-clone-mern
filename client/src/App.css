@@ -20,3 +20,9 @@
     width: 100%;
   }
 }
+
+.open-chatbot {
+  position: sticky;
+  bottom: 5%;
+  left: 85%;
+}

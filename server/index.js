@@ -5,6 +5,7 @@ import colors from 'colors'
 import userRoutes from "./routes/Users.js";
 import questionRoutes from "./routes/Questions.js";
 import answerRoutes from "./routes/Answers.js";
+import chatbotRoutes from "./routes/Chatbot.js";
 import connectDB from './config/connectDB.js'
 
 dotenv.config()
@@ -20,10 +21,11 @@ app.use(cors())
 app.use("/user", userRoutes);
 app.use("/questions", questionRoutes);
 app.use("/answer", answerRoutes);
+app.use("/chatbot", chatbotRoutes)
 
 
 app.get('/', (req, res) => {
-  res.send("This is a stack overflow clone API by Gautam Jha")
+  res.send("This is a stack overflow clone's API by Gautam Jha")
 })
 
 app.listen(PORT, () => {
