@@ -1,0 +1,146 @@
+.chatbot-container {
+  position: sticky;
+  left: 85%;
+  bottom: 0;
+  width: 22.5rem;
+  height: 30rem;
+  padding: 0px;
+  margin: 0;
+  color: black;
+  transition: all 0.3s;
+}
+
+.chatbot-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+  margin: 2px;
+  height: 10%;
+  background-color: #fbf3d5;
+  box-shadow: 0px 4px #ef8236;
+}
+
+.chatbot-header1 {
+  display: flex;
+}
+
+.chatbot-header p {
+  font-weight: bold;
+}
+
+.chatbot-header p:hover {
+  color: #ef8236;
+}
+
+.chatbot-icon {
+  cursor: pointer;
+  padding: 5px;
+  margin: 5px;
+  margin-right: 10px;
+  border-radius: 30%;
+}
+
+.chatbot-icon:hover {
+  background-color: #ef8236;
+  color: white;
+}
+
+.chatbot-chatwindow {
+  height: 80%;
+  margin: 2px;
+  background-color: #fbf3d5;
+  box-shadow: 0px 4px #ef8236;
+  overflow-x: hidden;
+  overflow-y: auto;
+  position: relative;
+}
+
+.chatbot-chatwindow-starter {
+  margin-left: 10px;
+}
+
+.chat-message {
+  background-color: #f1e5bc;
+  padding: 5px 0;
+}
+
+.chatgpt {
+  background-color: #ef8236;
+}
+
+.message {
+  padding: 2px 10px;
+}
+
+.chatbot-form {
+  background-color: #fbf3d5;
+  display: flex;
+  align-items: center;
+  margin: 1px;
+}
+
+.chatbot-form input {
+  width: 85%;
+  height: 30px;
+  border: none;
+}
+
+.chatbot-form input:focus {
+  outline: none;
+}
+.chatbot-form input::placeholder {
+  color: black;
+}
+
+.chatbot-button {
+  border: none;
+  background-color: #ef8236;
+  cursor: pointer;
+  border-radius: 30%;
+  padding: 5px 10px;
+}
+
+.chatbot-button:hover {
+  background-color: #ef83369a;
+}
+
+.chatbot-chatwindow-form {
+  position: absolute;
+  left: 20%;
+  top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatbot-chatwindow-form div {
+  padding: 10px;
+  text-align: center;
+}
+
+.chatbot-chatwindow-form p {
+  font-weight: bold;
+}
+
+.chatbot-chatwindow-form input {
+  height: 2rem;
+  width: 12rem;
+  border-radius: 2px;
+  border: none;
+  background-color: #f1e5bc;
+  box-shadow: 0px 1px #ef8236;
+}
+
+.chatbot-chatwindow-form button {
+  background-color: #ef8236;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.chatbot-chatwindow-form button:hover {
+  background-color: #ef83369a;
+}

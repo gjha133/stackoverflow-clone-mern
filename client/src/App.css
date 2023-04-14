@@ -20,3 +20,19 @@
     width: 100%;
   }
 }
+
+.open-chatbot {
+  position: sticky;
+  bottom: 5%;
+  left: 85%;
+  background-color: #ef8236;
+  border: none;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.open-chatbot:hover {
+  background-color: #ef83369a;
+}
