@@ -10,7 +10,8 @@ import { Toaster } from 'react-hot-toast';
 import Chatbot from "./components/Chatbot/Chatbot";
 
 function App() {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false) 
+  const [isVerified, setIsVerified] = useState(false) 
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -26,8 +27,9 @@ function App() {
         <AllRoutes />
         {isOpen ? (
           <Chatbot
-            isOpen={isOpen}
             setIsOpen={setIsOpen}
+            isVerified={isVerified}
+            setIsVerified={setIsVerified}
           />
         )
           : <button

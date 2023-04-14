@@ -11,6 +11,7 @@
   "author": "Gautam Jha",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
@@ -18,6 +19,7 @@
     "express": "^4.18.2",
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^7.0.2",
+    "nodemailer": "^6.9.1",
     "openai": "^3.2.1"
   }
 }
