@@ -66,6 +66,10 @@
   font-size: 13px;
 }
 
+.widget-tags-div p:hover {
+  background-color: #e1ecf4ae;
+}
+
 @media screen and (max-width: 1020px) {
   .right-sidebar {
     display: none;
