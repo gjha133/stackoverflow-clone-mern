@@ -13,7 +13,7 @@ import bars from "../../assets/bars-solid.svg";
 import './Navbar.css'
 
 
-const Navbar = () => {
+const Navbar = ({ setIsOpen }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const User = useSelector((state) => (state.currentUserReducer))
@@ -48,14 +48,13 @@ const Navbar = () => {
           <Link to="/" className="nav-item nav-logo">
             <img src={logo} alt="logo" />
           </Link>
-          <Link to="/" className="nav-item nav-btn res-nav">
-              About
+          <Link className="nav-item nav-btn res-nav" 
+            onClick={() => setIsOpen(prev => !prev)}
+          >
+              Chatbot
             </Link>
             <Link to="/" className="nav-item nav-btn res-nav">
-              Products
-            </Link>
-            <Link to="/" className="nav-item nav-btn res-nav">
-              Teams
+              Community
             </Link>
         </div>
         <div className="navbar-2">

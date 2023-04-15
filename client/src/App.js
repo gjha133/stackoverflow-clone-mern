@@ -23,7 +23,7 @@ function App() {
     <div className="App">
       <Router>
         <Toaster />
-        <Navbar />
+        <Navbar setIsOpen={setIsOpen}/>
         <AllRoutes />
         {isOpen ? (
           <Chatbot
