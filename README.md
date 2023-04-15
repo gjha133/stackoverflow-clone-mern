@@ -1,8 +1,7 @@
 # Stackoverflow-Clone-MERN
 ## Updates:
-- Integrated AI chatbot
-Stack Overflow CLone using mern-stack.
-Redux is used for state management.
+  - Integrated AI chatbot
+
 
 ### How to run the application locally: 
  
