@@ -58,6 +58,10 @@
   line-height: 22px;
 }
 
+.post-ans-container p .ans-tags:hover {
+  background-color: #e1ecf4ae;
+}
+
 .question-actions-user {
   width: 100%;
   display: flex;
