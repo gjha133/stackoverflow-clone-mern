@@ -115,7 +115,7 @@ const QuestionsDetails = () => {
                       <p className="question-body">{HTMLReactParser(question.questionBody)}</p>
                       <div className="question-details-tags">
                         {question.questionTags.map((tag) => (
-                          <p key={tag}>{tag}</p>
+                          <div key={tag}>{tag}</div>
                         ))}
                       </div>
                       <div className="question-actions-user">
