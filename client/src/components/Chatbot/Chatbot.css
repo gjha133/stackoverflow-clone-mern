@@ -84,6 +84,7 @@
   width: 85%;
   height: 30px;
   border: none;
+  padding: 5px;
 }
 
 .chatbot-form input:focus {
