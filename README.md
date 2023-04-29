@@ -1,6 +1,6 @@
 # Stackoverflow-Clone-MERN
 ## Updates:
-  - **Integrated AI chatbot**
+  - **Integrated AI chatbot using OpenAI**
 
 
 ### How to run the application locally: 
