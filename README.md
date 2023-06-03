@@ -1,7 +1,8 @@
 # Stackoverflow-Clone-MERN
-## Chatbot won't give response as the free trial got expired on 1 June 2023
+
 ## Updates:
   - **Integrated AI chatbot using OpenAI**
+  - ***Chatbot won't give response as the free trial got expired on 1 June 2023***
   
 
 
